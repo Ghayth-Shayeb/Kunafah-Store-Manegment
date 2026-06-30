@@ -11,7 +11,7 @@ app.use(methodOverride('_method'));
 // connections and running the programme
 async function run() {
     try {
-        await mongoose.connect( "mongodb+srv://<username>:<password>@cluster0.szie5ta.mongodb.net/dashboard?retryWrites=true&w=majority&appName=Cluster0");
+        await mongoose.connect( "mongodb+srv://ghaythshayeb_db_user:7tibcK3FN3dU98@cluster0.szie5ta.mongodb.net/dashboard?retryWrites=true&w=majority&appName=Cluster0");
         console.log("mongo run")
     }
     catch (err) {
