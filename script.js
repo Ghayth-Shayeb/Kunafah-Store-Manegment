@@ -87,11 +87,11 @@ app.get('/show', async (req, res) => {
 // update data
 app.post('/find', async (req, res) => {
   try {
-    const phone = req.body.yourPhone;
+    const phone = Number(req.body.yourPhone);
     const items = await dashboard_item.find({yourPhone: phone});
     if (!items.length) {
         console.log(items.length)
-      return res.status(404).send("لا يوجد طلبات مسجلة من هذا الرقم");
+        return res.status(404).send("لا يوجد طلبات مسجلة من هذا الرقم");
     }
     res.render('edit', {items});
   } catch (err) {
@@ -144,4 +144,7 @@ function from24to12(time24){
     return all;
 }
 
-app.listen(3000, () => console.log("Server established at PORT:3000"));
+const PORT = process.env.PORT || 3000;
+app.listen(3000, () => {
+    console.log(`Server established at PORT ${PORT}`);
+});

@@ -10,7 +10,7 @@
   "version": "1.0.0",
   "main": "script.js",
   "scripts": {
-    "test": "nodemon",
+    "start": "node script.js",
     "dev": "nodemon script.js"
   },
   "keywords": [],
