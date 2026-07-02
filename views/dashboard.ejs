@@ -36,6 +36,16 @@
         <p style="margin-top: 10px;">هل انهيت الطلب ؟</p>
         <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
     </form>
+    <form action="/confirm-order" method="POST">
+    <input type="hidden" name="yourName" value="<%= item.yourName %>">
+    <input type="hidden" name="yourPhone" value="<%= item.yourPhone %>">
+    <input type="hidden" name="quantity" value="<%= item.quantity %>">
+    <input type="hidden" name="time" value="<%= item.time %>">
+
+    <button type="submit" class="btn btn-success" style="margin-top:10px;">
+        🤖 تأكيد ذكي + مكالمة
+    </button>
+</form>
 </div>
 
 <% }) %>
