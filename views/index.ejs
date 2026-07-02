@@ -33,7 +33,6 @@
         <li class="nav-item">
           <a class="nav-link" href="#edit">تعديل بيانات طلبك</a>
         </li>
-        </li>
       </ul>
     </div>
   </div>
@@ -99,7 +98,7 @@
     <label for="input1">الشهر</label>
     <!--<input id="input1" type="number" name="month" placeholder="اكتب رقم الشهر." min="1" max="12" required> <== this was the old way i used -->
     <select id="input1"  name="month" aria-placeholder="اختر الشهر." required  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-        <option selected value="NaN">اختر الشهر.</option>
+        <option selected value="">اختر الشهر.</option>
         <option value="1">1 - يناير</option>
         <option value="2">2 - فبراير</option>
         <option value="3">3 - مارس</option>
@@ -113,7 +112,6 @@
         <option value="11">11 - نوفمبر</option>
         <option value="12">12 - ديسمبر</option>
     </select>
-    </select>
 </div>
 
 <div class="form-group">
@@ -124,6 +122,30 @@
 <div class="form-group">
     <label for="input3">الساعة</label>
     <input id="input3" type="time" name="time" placeholder="اضغط على أيقونة الساعة." style="text-align: right;" list="popular-times" required>
+</div>
+
+<div class="form-group">
+    <label for="input4">كم كيلو؟</label>
+    <input id="input4" type="text" name="quantity" min="1" placeholder="اضف رقماَ." required>
+</div>
+
+<div class="form-group">
+    <label for="input5">ملاحظات إضافية</label>
+    <textarea id="input5" rows="4" name="additionalNotes" placeholder="كيف تريد طلبك؟مثال: هل هنالك احد من العائلة لديه مرض السكري ؟ يمكننا تخصيص كمية له. ">يمكنك تركه فارغاً في حال عدم وجود ملاحظات.</textarea>
+</div>
+
+<div class="form-group">
+    <label for="input6">الاسم</label>
+    <input id="input6" type="text" name="yourName" placeholder="اسمك." required>
+</div>
+
+<div class="form-group">
+    <label for="input7">رقم الهاتف</label>
+    <input id="input7" type="number" name="yourPhone" placeholder="رقم هاتفك لنتواصل معك." style="text-align: right;" required>
+</div>
+<button type="submit" class="submit-btn">إرسال الطلب</button>
+
+</form>
 
 <datalist id="popular-times">
     <!--10 Oclock-->
@@ -215,30 +237,6 @@
   <option value="20:45">8:45 مساءً</option>
   <option value="20:50">8:50 مساءً</option>
 </datalist>
-</div>
-
-<div class="form-group">
-    <label for="input4">كم كيلو؟</label>
-    <input id="input4" type="text" name="quantity" min="1" placeholder="اضف رقماَ." required>
-</div>
-
-<div class="form-group">
-    <label for="input5">ملاحظات إضافية</label>
-    <textarea id="input5" rows="4" name="additionalNotes" placeholder="كيف تريد طلبك؟مثال: هل هنالك احد من العائلة لديه مرض السكري ؟ يمكننا تخصيص كمية له. ">يمكنك تركه فارغاً في حال عدم وجود ملاحظات.</textarea>
-</div>
-
-<div class="form-group">
-    <label for="input6">الاسم</label>
-    <input id="input6" type="text" name="yourName" placeholder="اسمك." required>
-</div>
-
-<div class="form-group">
-    <label for="input7">رقم الهاتف</label>
-    <input id="input7" type="number" name="yourPhone" placeholder="رقم هاتفك لنتواصل معك." style="text-align: right;" required>
-</div>
-<button type="submit" class="submit-btn">إرسال الطلب</button>
-
-</form>
 
 <form action="/find" method="POST" class="requesting-form" id="edit">
     <h1>هل تود التعديل على بياناتك ؟</h1>
