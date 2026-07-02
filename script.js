@@ -8,6 +8,8 @@ app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 
+const from24to12 = require("./public/javascript/time")
+
 // connections and running the programme
 async function run() {
     try {
@@ -59,7 +61,7 @@ app.post('/sign', async (req, res) => {
             time: req.body.time   
         });
         if(exists){
-            return res.status(400).sendFile(path.join(__dirname, 'public', 'validation.html'));
+            return res.status(404).sendFile(path.join(__dirname, 'public', 'validation.html'));
         }
         await dataForm.save();
 
@@ -91,7 +93,7 @@ app.post('/find', async (req, res) => {
     const items = await dashboard_item.find({yourPhone: phone});
     if (!items.length) {
         console.log(items.length)
-        return res.status(404).send("لا يوجد طلبات مسجلة من هذا الرقم");
+        return res.status(404).sendFile(path.join(__dirname, 'public', 'noNumber.html'));
     }
     res.render('edit', {items});
   } catch (err) {
@@ -127,22 +129,6 @@ app.post('/delete/:id', async (req, res) => {
         res.status(500).send(err.message);
     }
 });
-
-function from24to12(time24){
-    if (!time24) return "";
-
-    let [hours, minutes] = time24.split(":");
-
-    hours = parseInt(hours);
-
-    let period = hours >= 12 ? "PM" : "AM";
-
-    hours = hours % 12;
-    if (hours === 0) hours = 12;
-
-    let all = `${hours}:${minutes} ${period}`;
-    return all;
-}
 
 const PORT = process.env.PORT || 3000;
 app.listen(3000, () => {
