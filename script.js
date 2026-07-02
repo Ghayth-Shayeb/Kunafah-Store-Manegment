@@ -8,8 +8,6 @@ app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 const from24to12 = require("./public/javascript/time")
-const OpenAI = require("openai");
-const twilio = require("twilio");
 
 // connections and running the programme
 async function run() {
@@ -129,42 +127,6 @@ app.post('/delete/:id', async (req, res) => {
     catch(err){
         res.status(500).send(err.message);
     }
-});
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
-
-const client = twilio(
-  process.env.TWILIO_SID,
-  process.env.TWILIO_AUTH_TOKEN
-);
-
-app.post("/confirm-order", async (req, res) => {
-  try {
-    const order = req.body;
-
-    // AI message
-    const aiMessage = await openai.responses.create({
-      model: "gpt-4.1-mini",
-      input: `أكد الطلب التالي بطريقة قصيرة وواضحة: ${JSON.stringify(orde)}`
-    });
-
-    const message = aiMessage.output_text;
-
-    // call via Twilio
-    await client.calls.create({
-      to: order.yourPhone,
-      from: process.env.TWILIO_PHONE,
-      twiml: `<Response><Say>${message}</Say></Response>`
-    });
-
-    res.send("تم تأكيد الطلب");
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("فشل تأكيد الطلب");
-  }
 });
 
 const PORT = process.env.PORT || 3000;

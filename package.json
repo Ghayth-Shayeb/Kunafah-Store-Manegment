@@ -4,9 +4,7 @@
     "express": "^5.2.1",
     "method-override": "^3.0.0",
     "mongodb": "^7.3.0",
-    "mongoose": "^9.7.0",
-    "openai": "^6.45.0",
-    "twilio": "^6.0.2"
+    "mongoose": "^9.7.0"
   },
   "name": "abo-anas2",
   "version": "1.0.0",
