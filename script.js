@@ -26,7 +26,7 @@ let dashboardSchema = new mongoose.Schema({
     month: Number,
     dayOfMonth: Number,
     time: String,
-    quantity: String,
+    quantity: Number,
     additionalNotes: String,
     yourName: String,
     yourPhone: Number
