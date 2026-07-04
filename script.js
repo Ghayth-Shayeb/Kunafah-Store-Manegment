@@ -48,7 +48,7 @@ app.post('/sign', async (req, res) => {
             month: req.body.month,
             dayOfMonth: req.body.dayOfMonth,
             time: req.body.time,
-            quantity: toEnglish(req.body.quantity),
+            quantity: req.body.quantity,
             additionalNotes: req.body.additionalNotes,
             yourName: req.body.yourName,
             yourPhone: req.body.yourPhone
