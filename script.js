@@ -48,7 +48,7 @@ app.post('/sign', async (req, res) => {
             month: req.body.month,
             dayOfMonth: req.body.dayOfMonth,
             time: req.body.time,
-            quantity: req.body.quantity,
+            quantity: toEnglish(req.body.quantity),
             additionalNotes: req.body.additionalNotes,
             yourName: req.body.yourName,
             yourPhone: req.body.yourPhone
@@ -128,6 +128,8 @@ app.post('/delete/:id', async (req, res) => {
         res.status(500).send(err.message);
     }
 });
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(3000, () => {
