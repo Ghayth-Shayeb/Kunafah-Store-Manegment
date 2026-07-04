@@ -14,8 +14,7 @@ async function run() {
     try {
         await mongoose.connect( "mongodb+srv://ghaythshayeb_db_user:7tibcK3FN3dU98@cluster0.szie5ta.mongodb.net/dashboard?retryWrites=true&w=majority&appName=Cluster0");
         console.log("mongo run")
-    }
-    catch (err) {
+    }catch(err){
         app.get('/', (req, res) => {
             res.status(500).send(err.message);
         });
@@ -63,10 +62,9 @@ app.post('/sign', async (req, res) => {
             return res.status(404).sendFile(path.join(__dirname, 'public', 'validation.html'));
         }
         await dataForm.save();
-
-        res.redirect('/');
+        return res.status(201).sendFile(path.join(__dirname, 'public', 'complete.html'));
 // check if the date is available
-    } catch (err) {
+    }catch(err) {
         if (err.code === 11000) {
             return res.status(400).send("يوجد طلب آخر في نفس الموعد.");
         }
@@ -87,21 +85,21 @@ app.get('/show', async (req, res) => {
 });
 // update data
 app.post('/find', async (req, res) => {
-  try {
+  try{
     const phone = Number(req.body.yourPhone);
     const items = await dashboard_item.find({yourPhone: phone});
     if (!items.length) {
-        console.log(items.length)
+        console.log(items.length);
         return res.status(404).sendFile(path.join(__dirname, 'public', 'noNumber.html'));
     }
     res.render('edit', {items});
-  } catch (err) {
+  }catch(err) {
     res.status(500).send(err.message);
   }
 });
 
 app.put('/update/:id', async (req, res) => {
-  try {
+  try{
     await dashboard_item.findByIdAndUpdate(req.params.id, {
       yourName: req.body.yourName,
       yourPhone: req.body.yourPhone,
@@ -112,7 +110,7 @@ app.put('/update/:id', async (req, res) => {
       dayOfMonth: req.body.dayOfMonth
     });
 
-    res.redirect('/show');
+    return res.status(201).sendFile(path.join(__dirname, 'public', 'edited.html'));
 
   } catch (err) {
     res.status(500).send(err.message);
