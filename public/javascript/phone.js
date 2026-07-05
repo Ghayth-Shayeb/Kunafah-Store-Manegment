@@ -14,4 +14,4 @@ function callCustomer(phone) {
   });
 }
 
-module.exports = {callCustomer};
+module.exports = callCustomer;
