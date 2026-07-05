@@ -14,7 +14,7 @@ function from24to12(time24){
     return all;
 };
 function sendVoiceWhatsApp(phone) {
-  const link = `https://wa.me/${phone}?text=طلبك جاهز، اسمع الرسالة الصوتية: https://your-site.com/audio/ready.mp3`;
+  const link = `https://wa.me/${phone}?text=مرحباً! طلبك جاهز الآن., تعال لاستلامه.`;
   window.open(link, "_blank");
 }
 
