@@ -136,6 +136,9 @@ app.post("/order-ready", async (req, res) => {
     if (!phone) {
       return res.status(400).json({success: false, message: "ادخل رقماً"});
     }
+    if (!phone.startsWith("+")) {
+      phone = "+970" + phone.replace(/^0/, "");
+    }
     const call = await client.calls.create({
       to: phone,
       from: process.env.TWILIO_NUMBER,

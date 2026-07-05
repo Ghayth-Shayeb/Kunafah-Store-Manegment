@@ -1,15 +1,10 @@
 function callCustomer(phone) {
   fetch("/order-ready", {
-    method: "POST",headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({phone: phone})
-})
-  .then(res => res.json())
-  .then(data => {
-    console.log(data);
-    alert("Call sent!");
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ phone: String(phone) })
   })
-  .catch(err => {
-    console.error(err);
-    alert("Error calling customer");
-  });
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
 }
