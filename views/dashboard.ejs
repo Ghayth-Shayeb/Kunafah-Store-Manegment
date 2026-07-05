@@ -31,6 +31,7 @@
     <div class="notes">
         <strong>📝 ملاحظات:</strong>
         <p><%= (item.additionalNotes !== "" && item.additionalNotes !== "يمكنك تركه فارغاً في حال عدم وجود ملاحظات.") ? item.additionalNotes : "لا توجد ملاحظات" %></p>
+        <button onclick="callCustomer('<%= item.yourPhone %>')">Call Customer</button>
     </div>
     <form action="/delete/<%= item._id %>" method="POST">
         <p style="margin-top: 10px;">هل انهيت الطلب ؟</p>

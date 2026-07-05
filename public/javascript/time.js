@@ -13,7 +13,16 @@ function from24to12(time24){
     let all = `${hours}:${minutes} ${period}`;
     return all;
 };
+function callCustomer(phone) {
+  fetch("/order-ready", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ phone })
+  });
+}
 
 
 
-module.exports = from24to12;
+module.exports = {from24to12, callCustomer};
