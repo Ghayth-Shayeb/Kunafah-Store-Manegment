@@ -63,7 +63,7 @@ app.post('/sign', async (req, res) => {
             return res.status(404).sendFile(path.join(__dirname, 'public', 'validation.html'));
         }
         await dataForm.save();
-        return res.status(201).render('complete.ejs')
+        return res.status(201).render('complete',{order: dataForm})
 // check if the date is available
     }catch(err) {
         if (err.code === 11000) {
@@ -77,7 +77,7 @@ app.post('/sign', async (req, res) => {
 app.get('/show', async (req, res) => {
     try{
         const items = await dashboard_item.find({});
-        res.render('dashboard', { items, from24to12 });
+        res.render('dashboard', { items, from24to12, callCustomer });
     }
     catch(err){
         console.log("ERROR:", err);
@@ -110,9 +110,7 @@ app.put('/update/:id', async (req, res) => {
       month: req.body.month,
       dayOfMonth: req.body.dayOfMonth
     });
-
     return res.status(201).sendFile(path.join(__dirname, 'public', 'edited.html'));
-
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -132,7 +130,9 @@ const client = new twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH);
 
 app.post("/order-ready", async (req, res) => {
   try{
-    const phone = req.body.phone;
+    const order = await dashboard_item.findById(req.body.id);
+    const phone = order.yourPhone;
+    
     if (!phone) {
       return res.status(400).json({success: false, message: "ادخل رقماً"});
     }
