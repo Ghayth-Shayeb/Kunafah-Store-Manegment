@@ -13,5 +13,3 @@ function callCustomer(phone) {
     alert("Error calling customer");
   });
 }
-
-module.exports = callCustomer;
