@@ -2,7 +2,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const twilio = require("twilio");
 let app = express();
 app.use(express.json());
 app.use(express.static('public'));
@@ -125,29 +124,6 @@ app.post('/delete/:id', async (req, res) => {
     catch(err){
         res.status(500).send(err.message);
     }
-});
-// using twilio for calls
-const client = new twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH);
-
-app.post("/order-ready", async (req, res) => {
-  try{
-    const phone = req.body.phone;
-
-    if (!phone) {
-      return res.status(400).json({success: false, message: "ادخل رقماً"});
-    }
-    if (!phone.startsWith("+")) {
-      phone = "+970" + phone.replace(/^0/, "");
-    }
-    const call = await client.calls.create({
-      to: phone,
-      from: process.env.TWILIO_NUMBER,
-      twiml: `<Response><Say language="ar-SA">محل أبو أنس يتصل بك. طلبك جاهز، يرجى التوجه لاستلامه.</Say></Response>`
-    });
-    return res.json({success: true, sid: call.sid});
-  }catch(err) {
-    return res.status(500).json({success: false, error: err.message});
-  }
 });
 
 const PORT = process.env.PORT || 3000;

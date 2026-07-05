@@ -13,16 +13,11 @@ function from24to12(time24){
     let all = `${hours}:${minutes} ${period}`;
     return all;
 };
-function callCustomer(phone) {
-  fetch("/order-ready", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ phone })
-  });
+function sendVoiceWhatsApp(phone) {
+  const link = `https://wa.me/${phone}?text=طلبك جاهز، اسمع الرسالة الصوتية: https://your-site.com/audio/ready.mp3`;
+  window.open(link, "_blank");
 }
 
 
 
-module.exports = from24to12;
+module.exports = {from24to12, sendVoiceWhatsApp};

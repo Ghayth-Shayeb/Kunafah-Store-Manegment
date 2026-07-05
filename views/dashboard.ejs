@@ -31,7 +31,7 @@
     <div class="notes">
         <strong>📝 ملاحظات:</strong>
         <p><%= (item.additionalNotes !== "" && item.additionalNotes !== "يمكنك تركه فارغاً في حال عدم وجود ملاحظات.") ? item.additionalNotes : "لا توجد ملاحظات" %></p>
-        <button class="submit-btn" onclick="callCustomer('<%= item.yourPhone %>')">الاتصال بالعميل</button>
+        <button class="submit-btn" onclick="sendVoiceWhatsApp('<%= item.yourPhone %>')">اعلام العميل</button>
     </div>
     <form action="/delete/<%= item._id %>" method="POST">
         <p style="margin-top: 10px;">هل انهيت الطلب ؟</p>
@@ -147,7 +147,6 @@ strong{
     color:#b8860b;
 }
 </style>
-    <script" src="/javascript/phone.js"></script>
     <script src="/javascript/time.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
