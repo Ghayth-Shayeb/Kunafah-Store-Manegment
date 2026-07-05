@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const twilio = require("twilio");
 let app = express();
+app.use(express.json());
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
@@ -130,8 +131,7 @@ const client = new twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH);
 
 app.post("/order-ready", async (req, res) => {
   try{
-    const order = await dashboard_item.findById(req.body.id);
-    const phone = order.yourPhone;
+    const phone = req.body.phone;
 
     if (!phone) {
       return res.status(400).json({success: false, message: "ادخل رقماً"});
