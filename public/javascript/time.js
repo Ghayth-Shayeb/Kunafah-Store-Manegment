@@ -25,4 +25,4 @@ function callCustomer(phone) {
 
 
 
-module.exports = {from24to12};
+module.exports = from24to12;
