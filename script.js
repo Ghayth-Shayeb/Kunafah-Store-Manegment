@@ -30,7 +30,7 @@ let dashboardSchema = new mongoose.Schema({
     quantity: Number,
     additionalNotes: String,
     yourName: String,
-    yourPhone: Number
+    yourPhone: String
 });
 
     dashboardSchema.index({ month: 1, dayOfMonth: 1, time: 1 }, {unique: true });
