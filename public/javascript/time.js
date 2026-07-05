@@ -20,4 +20,4 @@ function sendVoiceWhatsApp(phone) {
 
 
 
-module.exports = {from24to12, sendVoiceWhatsApp};
+module.exports = from24to12;
