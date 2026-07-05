@@ -77,7 +77,7 @@ app.post('/sign', async (req, res) => {
 app.get('/show', async (req, res) => {
     try{
         const items = await dashboard_item.find({});
-        res.render('dashboard', { items, from24to12, callCustomer });
+        res.render('dashboard', {items, from24to12});
     }
     catch(err){
         console.log("ERROR:", err);
@@ -132,7 +132,7 @@ app.post("/order-ready", async (req, res) => {
   try{
     const order = await dashboard_item.findById(req.body.id);
     const phone = order.yourPhone;
-    
+
     if (!phone) {
       return res.status(400).json({success: false, message: "ادخل رقماً"});
     }
