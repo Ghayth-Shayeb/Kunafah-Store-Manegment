@@ -12,9 +12,6 @@ app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 const from24to12 = require('./public/javascript/time.js').from24to12;
 
-// Set Puppeteer executable path
-process.env.PUPPETEER_EXECUTABLE_PATH = '/usr/bin/google-chrome-stable';
-
 // connections and running the programme
 async function run() {
     try {
@@ -43,7 +40,16 @@ const dashboard_item = mongoose.model("dashboard_item", dashboardSchema);
 const path = require('path');
 
 const client = new Client({
-    authStrategy: new LocalAuth()
+    authStrategy: new LocalAuth(),
+    puppeteer: {
+        executablePath: '/usr/bin/google-chrome-stable',
+        headless: true,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage'
+        ]
+    }
 });
 let whatsappReady = false;
 client.on("qr", (qr) => {
