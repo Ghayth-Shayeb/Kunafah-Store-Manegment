@@ -133,7 +133,7 @@ app.get('/show', async (req, res) => {
 // update data
 app.post('/find', async (req, res) => {
   try{
-    const phone = Number(req.body.yourPhone);
+    const phone = String(req.body.yourPhone);
     const items = await dashboard_item.find({yourPhone: phone});
     if (!items.length) {
         console.log(items.length);
