@@ -16,7 +16,7 @@ const from24to12 = require('./public/javascript/time.js').from24to12;
 async function run() {
     try {
         await mongoose.connect( "mongodb+srv://ghaythshayeb_db_user:7tibcK3FN3dU98@cluster0.szie5ta.mongodb.net/dashboard?retryWrites=true&w=majority&appName=Cluster0");
-        console.log("mongo run")
+        console.log("mongoose connected");
     }catch(err){
         app.get('/', (req, res) => {
             res.status(500).send(err.message);
