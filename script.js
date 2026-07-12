@@ -55,7 +55,9 @@ client.on("disconnected", () => {
     whatsappReady = false;
 });
 
-client.initialize();
+client.initialize().catch(err => {
+    console.log("WhatsApp initialization error:", err.message);
+});
 client.on("change_state", state => {
     console.log("WhatsApp state:", state);
 });
@@ -182,6 +184,6 @@ app.post('/delete/:id', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(3000, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server established at PORT ${PORT}`);
 });
