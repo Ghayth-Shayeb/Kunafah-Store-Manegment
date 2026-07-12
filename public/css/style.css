@@ -230,3 +230,18 @@ transition:.3s;
 .submit-btn:hover{
 transform:translateY(-2px);
 }
+
+#whatsapp-link{
+color: white;
+text-decoration: none;
+background-color: #25D366;
+border-radius: 25px;
+padding: 7px 12px;
+display: inline-block;
+transition: all 0.3s;
+}
+
+#whatsapp-link:hover{
+background-color: #128C7E;
+transform: translateY(-2px);
+}

@@ -31,7 +31,7 @@
     <div class="notes">
         <strong>📝 ملاحظات:</strong>
         <p><%= (item.additionalNotes !== "" && item.additionalNotes !== "يمكنك تركه فارغاً في حال عدم وجود ملاحظات.") ? item.additionalNotes : "لا توجد ملاحظات" %></p>
-        <button class="submit-btn" onclick="sendVoiceWhatsApp('<%= item.yourPhone %>')">اعلام العميل</button>
+        <button class="submit-btn" onclick="sendTextWhatsApp('<%= item.yourPhone %>')">إعلام العميل</button>
     </div>
     <form action="/delete/<%= item._id %>" method="POST">
         <p style="margin-top: 10px;">هل انهيت الطلب ؟</p>

@@ -2,13 +2,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const {Client, LocalAuth} = require("whatsapp-web.js");
+const qrcode = require("qrcode-terminal");
 let app = express();
 app.use(express.json());
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
-const from24to12 = require("./public/javascript/time")
+const from24to12 = require('./public/javascript/time.js').from24to12;
 
 // connections and running the programme
 async function run() {
@@ -32,11 +34,36 @@ let dashboardSchema = new mongoose.Schema({
     yourPhone: String
 });
 
-    dashboardSchema.index({ month: 1, dayOfMonth: 1, time: 1 }, {unique: true });
+    dashboardSchema.index({month: 1, dayOfMonth: 1, time: 1}, {unique: true});
 
 const dashboard_item = mongoose.model("dashboard_item", dashboardSchema);
-
 const path = require('path');
+
+const client = new Client({
+    authStrategy: new LocalAuth()
+});
+let whatsappReady = false;
+client.on("qr", (qr) => {
+    qrcode.generate(qr, {small: true});
+});
+client.on("ready", () => {
+    console.log("WhatsApp is ready!");
+    whatsappReady = true;
+});
+
+client.on("disconnected", () => {
+    whatsappReady = false;
+});
+
+client.initialize();
+client.on("change_state", state => {
+    console.log("WhatsApp state:", state);
+});
+
+client.on("disconnected", reason => {
+    console.log("Disconnected:", reason);
+    whatsappReady = false;
+});
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -63,7 +90,21 @@ app.post('/sign', async (req, res) => {
             return res.status(404).sendFile(path.join(__dirname, 'public', 'validation.html'));
         }
         await dataForm.save();
+// send message to whatsapp
+        if(whatsappReady){
+            try{
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                const result = await client.sendMessage("972568771505@c.us", "طلب جديد قد تم استلامه");
+                
+                console.log("Sent:", result.id._serialized);
+            }
+            catch(err){
+                console.log("WhatsApp error:", err);
+        }
+    }
+
         return res.status(201).render('complete',{order: dataForm})
+
 // check if the date is available
     }catch(err) {
         if (err.code === 11000) {
@@ -110,7 +151,21 @@ app.put('/update/:id', async (req, res) => {
       month: req.body.month,
       dayOfMonth: req.body.dayOfMonth
     });
+
+    if (whatsappReady) {
+        try {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            const result = await client.sendMessage(`972568771505@c.us`, "لقد تم تعديل طلب");
+                
+            console.log("Sent:", result.id._serialized);
+        }
+        catch(err) {
+            console.log("WhatsApp error:", err);
+    };
+};
+
     return res.status(201).sendFile(path.join(__dirname, 'public', 'edited.html'));
+
   } catch (err) {
     res.status(500).send(err.message);
   }
