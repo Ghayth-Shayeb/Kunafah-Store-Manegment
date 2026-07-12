@@ -12,6 +12,9 @@ app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 const from24to12 = require('./public/javascript/time.js').from24to12;
 
+// Set Puppeteer executable path
+process.env.PUPPETEER_EXECUTABLE_PATH = '/usr/bin/google-chrome-stable';
+
 // connections and running the programme
 async function run() {
     try {
