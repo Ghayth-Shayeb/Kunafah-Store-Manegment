@@ -1,23 +1,12 @@
-# fly.toml app configuration file generated for kunafah-store-manegment on 2026-07-12T18:14:00Z
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
-app = 'kunafah-store-manegment'
-primary_region = 'cdg'
+app = "kunafah-store"
+primary_region = "iad"
 
 [build]
+dockerfile = "Dockerfile"
 
-[http_service]
-  internal_port = 3000
-  force_https = true
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
+[env]
+PUPPETEER_EXECUTABLE_PATH = "/usr/bin/google-chrome-stable"
 
-[[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
-  cpus = 1
-  memory_mb = 256
+[[mounts]]
+source = "whatsapp_data"
+destination = "/app/.wwebjs_cache"
