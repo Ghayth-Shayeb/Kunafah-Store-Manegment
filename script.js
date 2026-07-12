@@ -161,8 +161,8 @@ app.put('/update/:id', async (req, res) => {
         }
         catch(err) {
             console.log("WhatsApp error:", err);
-    };
-};
+        }
+    }
 
     return res.status(201).sendFile(path.join(__dirname, 'public', 'edited.html'));
 
