@@ -13,7 +13,8 @@
   "main": "script.js",
   "scripts": {
     "start": "node script.js",
-    "dev": "nodemon script.js"
+    "dev": "nodemon script.js",
+    "postinstall": "npx puppeteer browsers install chrome"
   },
   "keywords": [],
   "author": "",
