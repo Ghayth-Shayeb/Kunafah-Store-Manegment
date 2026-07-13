@@ -139,10 +139,10 @@ app.get('/show', async (req, res) => {
 // update data
 app.post('/find', async (req, res) => {
   try{
-    const phone = String(req.body.yourPhone);
+    const phone = req.body.yourPhone;
     const items = await dashboard_item.find({yourPhone: phone});
     if (!items.length) {
-        console.log(items.length);
+        console.log("No phone found for: ", phone);
         return res.status(404).sendFile(path.join(__dirname, 'public', 'noNumber.html'));
     }
     res.render('edit', {items});
