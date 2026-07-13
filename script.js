@@ -42,7 +42,7 @@ const path = require('path');
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        executablePath: '/usr/bin/google-chrome-stable',
+        executablePath: '/usr/bin/chromium',
         headless: true,
         args: [
             '--no-sandbox',

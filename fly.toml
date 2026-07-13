@@ -1,11 +1,11 @@
-app = "kunafah-store"
+app = "kunafah-store-manegment"
 primary_region = "iad"
 
 [build]
 dockerfile = "Dockerfile"
 
 [env]
-PUPPETEER_EXECUTABLE_PATH = "/usr/bin/google-chrome-stable"
+PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium"
 
 [[mounts]]
 source = "whatsapp_data"
