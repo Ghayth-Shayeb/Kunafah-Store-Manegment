@@ -19,7 +19,7 @@
 
     <div class="info">
         <p><strong>📞 الهاتف:</strong> <%= item.yourPhone %></p>
-        <p><strong>🕒 الوقت:</strong> <%= item.time ? from24to12(item.time) : "غير محدد" %></p>
+<% const t = (typeof from24to12 === 'function') ? from24to12(item.time) : item.time; %><%= item.time ? t : "غير محدد" %>
         <p><strong>📅 التاريخ:</strong>
             <br>
             <%= item.dayOfMonth %>-->اليوم
