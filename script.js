@@ -46,6 +46,7 @@ const client = new Client({
     puppeteer: {
         executablePath: "/usr/bin/chromium",
         headless: true,
+        timeout: 60000,
         args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",
@@ -53,7 +54,9 @@ const client = new Client({
             "--disable-gpu",
             "--no-first-run",
             "--no-zygote",
-            "--single-process"
+            "--disable-features=site-per-process",
+            "--disable-background-timer-throttling",
+            "--disable-renderer-backgrounding"
         ]
     }
 });
