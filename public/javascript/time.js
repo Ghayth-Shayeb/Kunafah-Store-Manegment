@@ -14,4 +14,4 @@ function from24to12(time24){
     return all;
 };
 
-module.exports = from24to12;
+module.exports = {from24to12};
