@@ -2,8 +2,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const {Client, LocalAuth} = require("whatsapp-web.js");
-const qrcode = require("qrcode-terminal");
 let app = express();
 app.use(express.json());
 app.use(express.static('public'));
@@ -38,52 +36,6 @@ let dashboardSchema = new mongoose.Schema({
 
 const dashboard_item = mongoose.model("dashboard_item", dashboardSchema);
 const path = require('path');
-
-const client = new Client({
-    authStrategy: new LocalAuth({
-        dataPath: "/app/whatsapp_data"
-    }),
-    puppeteer: {
-        executablePath: "/usr/bin/chromium",
-        headless: true,
-        timeout: 60000,
-        args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-gpu",
-            "--no-first-run",
-            "--no-zygote",
-            "--disable-features=site-per-process",
-            "--disable-background-timer-throttling",
-            "--disable-renderer-backgrounding"
-        ]
-    }
-});
-let whatsappReady = false;
-client.on("qr", (qr) => {
-    qrcode.generate(qr, {small: true});
-});
-client.on("ready", () => {
-    console.log("WhatsApp is ready!");
-    whatsappReady = true;
-});
-
-client.on("disconnected", () => {
-    whatsappReady = false;
-});
-
-client.initialize().catch(err => {
-    console.log("WhatsApp initialization error:", err.message);
-});
-client.on("change_state", state => {
-    console.log("WhatsApp state:", state);
-});
-
-client.on("disconnected", reason => {
-    console.log("Disconnected:", reason);
-    whatsappReady = false;
-});
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -171,18 +123,6 @@ app.put('/update/:id', async (req, res) => {
       month: req.body.month,
       dayOfMonth: req.body.dayOfMonth
     });
-
-    if (whatsappReady) {
-        try {
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            const result = await client.sendMessage(`972568771505@c.us`, "لقد تم تعديل طلب");
-                
-            console.log("Sent:", result.id._serialized);
-        }
-        catch(err) {
-            console.log("WhatsApp error:", err);
-        }
-    }
 
     return res.status(201).sendFile(path.join(__dirname, 'public', 'edited.html'));
 
