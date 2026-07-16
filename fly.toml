@@ -9,4 +9,4 @@ PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium"
 
 [[mounts]]
 source = "whatsapp_data"
-destination = "/app/.wwebjs_cache"
+destination = "/app/whatsapp_data"
