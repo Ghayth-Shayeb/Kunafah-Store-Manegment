@@ -62,18 +62,6 @@ app.post('/sign', async (req, res) => {
             return res.status(404).sendFile(path.join(__dirname, 'public', 'validation.html'));
         }
         await dataForm.save();
-// send message to whatsapp
-        if(whatsappReady){
-            try{
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                const result = await client.sendMessage("972568771505@c.us", "طلب جديد قد تم استلامه");
-                
-                console.log("Sent:", result.id._serialized);
-            }
-            catch(err){
-                console.log("WhatsApp error:", err);
-        }
-    }
 
         return res.status(201).render('complete',{order: dataForm})
 
