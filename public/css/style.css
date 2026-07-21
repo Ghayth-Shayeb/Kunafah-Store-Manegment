@@ -198,7 +198,8 @@ margin-bottom:8px;
 }
 
 .form-group input,
-.form-group textarea{
+.form-group textarea,
+.form-group select{
 padding:12px;
 border:2px solid #ddd;
 border-radius:10px;
@@ -208,7 +209,8 @@ transition:.3s;
 }
 
 .form-group input:focus,
-.form-group textarea:focus{
+.form-group textarea:focus,
+.form-group select:focus{
 outline:none;
 border-color:#d4a017;
 box-shadow:0 0 10px rgba(212,160,23,.3);
