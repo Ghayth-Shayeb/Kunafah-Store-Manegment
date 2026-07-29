@@ -128,9 +128,10 @@ app.post('/delete/:id', async (req, res) => {
         res.status(500).send(err.message);
     }
 });
+    const debt_item = mongoose.model("debt_item", dashboardSchema);
 // putting a card on debt section
 app.post('/debt/:id', async (req, res) => {
-    const debt_item = mongoose.model("debt_item", dashboardSchema);
+    const debts = await debt_item.find({});
     try{
         await debt_item.create(await dashboard_item.findById(req.params.id));
         dashboard_item.findByIdAndDelete(req.params.id);

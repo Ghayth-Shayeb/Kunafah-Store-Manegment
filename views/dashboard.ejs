@@ -36,33 +36,29 @@
     <form action="/delete/<%= item._id %>" method="POST">
         <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
     </form>
-    <form action="/debt/<% item._id %> method="POST">
+    <form action="/debt/<%= item._id %>" method="POST">
         <button type="submit" class="btn btn-warning"><i class="bi bi-wallet2"></i></button>
     </form>    
 </div>
-
+<% }) %>
+<% debts.forEach(debt => { %>
 </div>
 <br>
-<div class="order-card" style="width:80%;">
     <h1>الديون</h2>
-</div>
->
 <div class="order-card">
     
     <div class="info">
-        <p><strong>📞 الهاتف:</strong> <%= item.yourPhone %></p>
-        <p><strong>⚖️ الكمية:</strong> <%= Number(item.quantity) %> كيلو</p>
-        <p><strong>💰 المبلغ:</strong> <%= Math.ceil(Number(item.quantity) * 25) %> شيكل</p>
+        <p><strong>📞 الهاتف:</strong> <%= debt.yourPhone %></p>
+        <p><strong>⚖️ الكمية:</strong> <%= Number(debt.quantity) %> كيلو</p>
+        <p><strong>💰 المبلغ:</strong> <%= Math.ceil(Number(debt.quantity) * 25) %> شيكل</p>
         <hr>
 
-        <form action="/delete/<%= item._id %>" method="POST">
+        <form action="/delete/<%= debt._id %>" method="POST">
              <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
         </form>
     </div>
 </div>
-
 <% }) %>
-
 </div>
 <div id="links">
     <a href="/" class="submit-btn">الرجوع للرئيسية</a>
@@ -158,11 +154,9 @@ body{
 transform:translateY(-2px);
 }
 
-.together{
-    display:inline;
-   
-    margin-right: 10px;
-    margin-left: 10px;
+.together button{
+    display:block;
+    margin-bottom: 10px;
     margin-top: 10px;
     align-items:center;
 }
