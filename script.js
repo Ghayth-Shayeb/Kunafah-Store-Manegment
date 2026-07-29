@@ -128,6 +128,19 @@ app.post('/delete/:id', async (req, res) => {
         res.status(500).send(err.message);
     }
 });
+// putting a card on debt section
+app.post('/debt/:id', async (req, res) => {
+    const debt_item = mongoose.model("debt_item", dashboardSchema);
+    try{
+        await debt_item.create(await dashboard_item.findById(req.params.id));
+        dashboard_item.findByIdAndDelete(req.params.id);
+        res.redirect('/show')
+    }
+    catch(err){
+        res.status(500).send(err.message);
+    }
+
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
