@@ -102,6 +102,8 @@ button:hover{
 <form action="/update/<%= item._id %>?_method=PUT" method="POST">
     <input name="yourName" value="<%= item.yourName %>" placeholder="الاسم">
     <input name="yourPhone" value="<%= item.yourPhone %>" placeholder="رقم الهاتف">
+    <input name="month" value="<%= item.month %>" type="number" placeholder="الشهر" min="1" max="12">
+    <input name="dayOfMonth" value="<%= item.dayOfMonth %>" type="number" placeholder="اليوم" min="1" max="31">
     <input name="time" value="<%= item.time %>" type="time">
     <input name="quantity" value="<%= item.quantity %>" type="number" placeholder="الكمية">
     <input name="additionalNotes" value="<%= item.additionalNotes %>" placeholder="ملاحظات">

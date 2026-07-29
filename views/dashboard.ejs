@@ -39,28 +39,29 @@
     <form action="/debt/<%= item._id %>" method="POST">
         <button type="submit" class="btn btn-warning"><i class="bi bi-wallet2"></i></button>
     </form>    
-
-
 </div>
 <% }) %>
-<% debts.forEach(debt => { %>
 </div>
+
+<% if (debts && debts.length > 0) { %>
 <br>
-    <h1>الديون</h2>
+<h1 style="text-align:center; color:#b8860b; font-weight:800; background:white; max-width:500px; margin:20px auto; padding:15px; border-radius:20px; border:3px solid #f0c040;">الديون</h1>
+<div class="orders-container">
+<% debts.forEach(debt => { %>
 <div class="order-card">
-    
     <div class="info">
         <p><strong>📞 الهاتف:</strong> <%= debt.yourPhone %></p>
         <p><strong>⚖️ الكمية:</strong> <%= Number(debt.quantity) %> كيلو</p>
         <p><strong>💰 المبلغ:</strong> <%= Math.ceil(Number(debt.quantity) * 25) %> شيكل</p>
         <hr>
-
         <form action="/delete/<%= debt._id %>" method="POST">
              <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
         </form>
     </div>
 </div>
 <% }) %>
+</div>
+<% } %>
 </div>
 <div id="links">
     <a href="/" class="submit-btn">الرجوع للرئيسية</a>

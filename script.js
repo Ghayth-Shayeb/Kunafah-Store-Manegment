@@ -35,6 +35,7 @@ let dashboardSchema = new mongoose.Schema({
     dashboardSchema.index({month: 1, dayOfMonth: 1, time: 1}, {unique: true});
 
 const dashboard_item = mongoose.model("dashboard_item", dashboardSchema);
+const debt_item = mongoose.model("debt_item", dashboardSchema);
 const path = require('path');
 
 app.get('/', (req, res) => {
@@ -63,7 +64,7 @@ app.post('/sign', async (req, res) => {
         }
         await dataForm.save();
 
-        return res.status(201).render('complete',{order: dataForm})
+return res.status(201).render('complete',{order: dataForm, from24to12})
 
 // check if the date is available
     }catch(err) {
@@ -78,7 +79,8 @@ app.post('/sign', async (req, res) => {
 app.get('/show', async (req, res) => {
     try{
         const items = await dashboard_item.find({});
-        res.render('dashboard', {items, from24to12});
+        const debts = await debt_item.find({});
+        res.render('dashboard', {items, debts, from24to12});
     }
     catch(err){
         console.log("ERROR:", err);
@@ -128,13 +130,12 @@ app.post('/delete/:id', async (req, res) => {
         res.status(500).send(err.message);
     }
 });
-    const debt_item = mongoose.model("debt_item", dashboardSchema);
 // putting a card on debt section
 app.post('/debt/:id', async (req, res) => {
-    const debts = await debt_item.find({});
     try{
-        await debt_item.create(await dashboard_item.findById(req.params.id));
-        dashboard_item.findByIdAndDelete(req.params.id);
+        const item = await dashboard_item.findById(req.params.id);
+        await debt_item.create(item);
+        await dashboard_item.findByIdAndDelete(req.params.id);
         res.redirect('/show')
     }
     catch(err){
