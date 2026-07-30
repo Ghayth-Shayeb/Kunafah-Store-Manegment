@@ -137,6 +137,8 @@ app.post('/debt/:id', async (req, res) => {
         await debt_item.create(item);
         await dashboard_item.findByIdAndDelete(req.params.id);
         res.redirect('/show')
+
+        res.render("dashboard", {debts});
     }
     catch(err){
         res.status(500).send(err.message);
