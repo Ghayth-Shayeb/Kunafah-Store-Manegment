@@ -123,7 +123,10 @@ app.put('/update/:id', async (req, res) => {
 // delete data
 app.post('/delete/:id', async (req, res) => {
     try{
-        await dashboard_item.findByIdAndDelete(req.params.id);
+        const deletedFromDashboard = await dashboard_item.findByIdAndDelete(req.params.id);
+        if (!deletedFromDashboard) {
+            await debt_item.findByIdAndDelete(req.params.id);
+        }
         res.redirect('/show')
     }
     catch(err){
@@ -134,7 +137,8 @@ app.post('/delete/:id', async (req, res) => {
 app.post('/debt/:id', async (req, res) => {
     try{
         const item = await dashboard_item.findById(req.params.id);
-        await debt_item.createCollection(item);
+        // Convert Mongoose document to plain object to avoid internal state conflicts
+        await debt_item.create(item.toObject());
         await dashboard_item.findByIdAndDelete(req.params.id);
         res.redirect('/show')
     }
