@@ -134,11 +134,9 @@ app.post('/delete/:id', async (req, res) => {
 app.post('/debt/:id', async (req, res) => {
     try{
         const item = await dashboard_item.findById(req.params.id);
-        await debt_item.create(item);
+        await debt_item.createCollection(item);
         await dashboard_item.findByIdAndDelete(req.params.id);
         res.redirect('/show')
-
-        res.render("dashboard", {debts});
     }
     catch(err){
         res.status(500).send(err.message);
