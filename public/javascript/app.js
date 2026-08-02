@@ -13,6 +13,7 @@ function dating() {
 }
 
 function day(){
+    const monthSelect = document.getElementById("input1");
     const daySelect = document.getElementById("input2");
     const currentDay = new Date().getDate();
     const currentMonth = new Date().getMonth() + 1;
