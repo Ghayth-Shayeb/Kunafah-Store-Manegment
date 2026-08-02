@@ -51,6 +51,7 @@
 <% debts.forEach(debt => { %>
 <div class="order-card">
     <div class="info">
+        <h1><strong><%= debt.yourName %></strong></h1>
         <p><strong>📞 الهاتف:</strong> <%= debt.yourPhone %></p>
         <p><strong>⚖️ الكمية:</strong> <%= Number(debt.quantity) %> كيلو</p>
         <p><strong>💰 المبلغ:</strong> <%= Math.ceil(Number(debt.quantity) * 25) %> شيكل</p>

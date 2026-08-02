@@ -13,6 +13,7 @@
 
         <p>الكمية: <%= order.quantity %></p>
         <p>الوقت: <%= from24to12(order.time) %></p>
+        <p>الثمن: <%= Math.ceil(Number(order.quantity) * 25) %> شيكل</p>
 
         <div class="alert alert-danger d-flex align-items-center" role="alert">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
