@@ -17,7 +17,7 @@ function day(){
     const currentDay = new Date().getDate();
     const currentMonth = new Date().getMonth() + 1;
     daySelect.innerHTML = '<option selected value="">اختر تاريخ معين, يوم 20 من الشهر كمثال</option>';
-    if (currentMonth === new Date().getMonth() + 1) {
+    if (currentMonth == monthSelect.value) {
         for (let d = currentDay; d <= 31; d++) {
             const option = document.createElement("option");
             option.value = d;
