@@ -1,7 +1,8 @@
+const monthNames = ["يناير","فبراير","مارس","إبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+
 function dating() {
     const monthSelect = document.getElementById("input1");
     const currentMonth = new Date().getMonth() + 1;
-    const monthNames = ["يناير","فبراير","مارس","إبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
     monthSelect.innerHTML = '<option selected value="">اختر الشهر.</option>';
 
     for (let m = currentMonth; m <= 12; m++) {
@@ -13,12 +14,13 @@ function dating() {
 }
 
 function day(){
+    let NumberVersionOfMonthSelect = Number(monthSelect.value);
     const monthSelect = document.getElementById("input1");
     const daySelect = document.getElementById("input2");
     const currentDay = new Date().getDate();
     const currentMonth = new Date().getMonth() + 1;
     daySelect.innerHTML = '<option selected value="">اختر تاريخ معين, يوم 20 من الشهر كمثال</option>';
-    if (currentMonth == monthSelect.value) {
+    if (NumberVersionOfMonthSelect === monthSelect.value) {
         for (let d = currentDay; d <= 31; d++) {
             const option = document.createElement("option");
             option.value = d;
@@ -26,7 +28,8 @@ function day(){
             daySelect.appendChild(option);
         }
     }
-    else if (monthSelect.value === monthNames[1]) {
+    
+    else if (NumberVersionOfMonthSelect === 2) {
         for (let d = 1; d <= 28; d++) {
             const option = document.createElement("option");
             option.value = d;
@@ -34,7 +37,7 @@ function day(){
             daySelect.appendChild(option);
         }
     }
-    else if (monthSelect.value === monthNames[3] || monthSelect.value === monthNames[5] || monthSelect.value === monthNames[8] || monthSelect.value === monthNames[10]) {
+    else if (NumberVersionOfMonthSelect === 4 || NumberVersionOfMonthSelect === 6 || NumberVersionOfMonthSelect === 9 || NumberVersionOfMonthSelect === 11) {
         for (let d = 1; d <= 30; d++) {
             const option = document.createElement("option");
             option.value = d;
@@ -42,7 +45,7 @@ function day(){
             daySelect.appendChild(option);
         }
     }
-    else if (monthSelect.value === monthNames[0] || monthSelect.value === monthNames[2] || monthSelect.value === monthNames[4] || monthSelect.value === monthNames[6] || monthSelect.value === monthNames[7] || monthSelect.value === monthNames[9] || monthSelect.value === monthNames[11]) {
+    else if (NumberVersionOfMonthSelect === 1 || NumberVersionOfMonthSelect === 3 || NumberVersionOfMonthSelect === 5 || NumberVersionOfMonthSelect === 7 || NumberVersionOfMonthSelect === 8 || NumberVersionOfMonthSelect === 10 || NumberVersionOfMonthSelect === 12) {
         for (let d = 1; d <= 31; d++) {
             const option = document.createElement("option");
             option.value = d;
@@ -61,5 +64,5 @@ function day(){
 }
 window.addEventListener("DOMContentLoaded", () => {
     dating();
-    day();
+    document.getElementById("input1").addEventListener("change", day);
 });
