@@ -14,13 +14,13 @@ function dating() {
 }
 
 function day(){
-    let NumberVersionOfMonthSelect = Number(monthSelect.value);
     const monthSelect = document.getElementById("input1");
     const daySelect = document.getElementById("input2");
+    let NumberVersionOfMonthSelect = Number(monthSelect.value);
     const currentDay = new Date().getDate();
     const currentMonth = new Date().getMonth() + 1;
     daySelect.innerHTML = '<option selected value="">اختر تاريخ معين, يوم 20 من الشهر كمثال</option>';
-    if (NumberVersionOfMonthSelect === monthSelect.value) {
+    if (NumberVersionOfMonthSelect === currentMonth) {
         for (let d = currentDay; d <= 31; d++) {
             const option = document.createElement("option");
             option.value = d;
